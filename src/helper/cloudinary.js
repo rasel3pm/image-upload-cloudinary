@@ -5,13 +5,4 @@ cloudinary.config({
   api_secret: process.env.API_SECRATE,
 });
 
-cloudinary.uploader.upload("image", (err, result) => {
-  if (err) {
-    res.send(err);
-  } else {
-    res.json({
-      url: result.url,
-      public_id: result.public_id,
-    });
-  }
-});
+module.exports = cloudinary;
