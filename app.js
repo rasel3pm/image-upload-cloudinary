@@ -4,6 +4,18 @@ const bodyParser = require("body-parser");
 const router = require("./src/router/api");
 const mongoose = require("mongoose");
 const path = require("path");
+const cors = require("cors");
+app.use(cors());
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//   })
+// );
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173"); // Replace with your frontend domain
+//   res.setHeader("Access-Control-Allow-Credentials", "true");
+//   next();
+// });
 
 let URL =
   "mongodb+srv://<username>:<password>@cluster0.7dgocwt.mongodb.net/ImageStore?retryWrites=true&w=majority";
@@ -22,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ limiter: "50mb" }));
 app.use(express.json());
 app.use(router);
+
 app.use(express.static("client/dist"));
 app.get("*", function (res, res) {
   res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));

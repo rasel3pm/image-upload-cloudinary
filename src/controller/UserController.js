@@ -23,3 +23,12 @@ exports.UserRegister = async (req, res) => {
     res.status(200).json({ status: "fail", error });
   }
 };
+
+exports.getUserInfo = async (req, res) => {
+  try {
+    let data = await User.find().sort({ name: -1 });
+    res.status(200).json({ status: true, message: "Success", data: data });
+  } catch (error) {
+    res.status(200).json({ message: "Something went wrong" });
+  }
+};
