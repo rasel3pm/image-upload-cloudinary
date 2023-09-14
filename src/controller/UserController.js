@@ -26,7 +26,7 @@ exports.UserRegister = async (req, res) => {
 
 exports.getUserInfo = async (req, res) => {
   try {
-    let data = await User.find().sort({ name: -1 });
+    let data = await User.find().sort({ createdAt: -1 });
     res.status(200).json({ status: true, message: "Success", data: data });
   } catch (error) {
     res.status(200).json({ message: "Something went wrong" });

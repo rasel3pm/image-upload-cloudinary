@@ -1,47 +1,40 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import PrfileCard from "./ProfileCard";
 
 const Profile = () => {
   const URL = "http://localhost:5000";
   const [profile, setProfile] = useState([]);
+  const [id, setId] = useState([]);
 
   useEffect(() => {
     axios
       .get(`${URL}/get-user`)
       .then((res) => {
         setProfile(res.data.data);
+        setId(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []); // Remove 'data' from the dependency array to prevent infinite calls
+  }, [id]); // Remove 'data' from the dependency array to prevent infinite calls
   console.log(profile);
-
   return (
-    <>
-      <div>
-        <table className="table bordered striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Photo</th>
-            </tr>
-          </thead>
-          <tbody>
-            {profile.map((item) => (
-              <tr key={item._id}>
-                <td>{item["name"]}</td>
-                <td>
-                  {item.image.map((img) => (
-                    <img width={100} src={img.url} />
-                  ))}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="pt-5">
+      <div className="row d-flex justify-content-center item-center">
+        {profile.map((item) => {
+          return (
+            <div className="col-md-3 d-flex gap-4 my-2 justify-content-center item-center">
+              <PrfileCard
+                key={item._id}
+                name={item["name"]}
+                image={item.image}
+              />
+            </div>
+          );
+        })}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -60,8 +60,8 @@ const App = () => {
             />
           </div>
           <div className="col-md-4">
-            <button className="btn btn-primary" type="submit">
-              Submit
+            <button className="btn btn-success" type="submit">
+              Upload
             </button>
           </div>
         </div>
